@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-export default function Display() {
+export default function Display(props) {
     
     return (
       <div className="display-container">
         <div className="display-screen">
-            <p id="input">Input</p>
-            <p id="display">0</p>
+            <p id="input">{props.input}</p>
+            <p id="display">{props.display}</p>
         </div>
         
       </div>

@@ -4,13 +4,24 @@ import Keypad from './Keypad.jsx'
 import Display from './Display.jsx'
 function App() {
 
+  const [input, setInput] = useState("0")
+  const [display, setDisplay] = useState("0")
+
   return (
     <section id="calculator-container">
-
-      <h1>JS Calc</h1>
-      <Display/>
-      <Keypad/>
-      <p id="signature">Daniel Tosaus - 2025</p>
+      <Display
+        input={input}
+        display={display}
+      />
+      <Keypad
+        input={input}
+        display={display}
+        setInput={setInput}
+        setDisplay={setDisplay}
+      />
+      <footer className="signature">
+        Daniel Tosaus - 2025
+      </footer>
     </section>
   )
 }
