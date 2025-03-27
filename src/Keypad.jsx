@@ -51,37 +51,6 @@ export default function Keypad(props) {
     }
     return newTokens;
   }
-  function preprocessTokens(tokens) {
-    let processedTokens = [];
-    let lastOperator = null;
-    let expectNegative = false; // Flag to track when to treat a number as negative
-
-    for (let i = 0; i < tokens.length; i++) {
-        let token = tokens[i];
-
-        if ("+-*/".includes(token)) {
-            if (lastOperator === null || "*/".includes(token)) {
-                lastOperator = token; // Store the last encountered operator
-            } else if (token === "-") {
-                expectNegative = true; // If the last operator was something else, treat this "-" as a negative marker
-            }
-        } else {
-            // It's a number
-            if (expectNegative) {
-                processedTokens.push("-" + token); // Convert to negative
-                expectNegative = false; // Reset flag
-            } else {
-                if (lastOperator) {
-                    processedTokens.push(lastOperator);
-                    lastOperator = null;
-                }
-                processedTokens.push(token);
-            }
-        }
-    }
-
-    return processedTokens;
-  }
 
   function parseExpression(tokens) {
     let value = parseTerm(tokens);
@@ -113,8 +82,7 @@ export default function Keypad(props) {
 
   function evaluate(expression) {
     let tokens = tokenize(expression);
-    let processedTokens = preprocessTokens(tokens);
-    return parseExpression(processedTokens);
+    return parseExpression(tokens);
   }
 
   function parseInput(i){
@@ -179,7 +147,7 @@ export default function Keypad(props) {
       let key = event.key;
       if (key === "Enter") key = "="; // Treat Enter as "="
       if (key === "c") key = "C";
-      
+
       if (allowedKeys.includes(key)) {
         const button = document.querySelector(`.button[data-key="${key}"]`);
         if (button) {
