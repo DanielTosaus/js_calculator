@@ -253,9 +253,7 @@ export default function Keypad(props) {
       <audio id="audio_clip">
         <source src="../public/click.mp3" type="audio/mp3"/>
       </audio>
-      <audio id="audio_error_clip">
-        <source src="../public/click_error.mp3" type="audio/mp3"/>
-      </audio>
+      <audio id="audio_error_clip" src="/click_error.mp3"></audio>
     </div>
   );
 }
